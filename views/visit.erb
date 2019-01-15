@@ -1,0 +1,38 @@
+<h1>Записаться</h1>
+<br>
+<p><%= @message %></p>
+
+
+
+<br>
+<form action="/visit" method="post">
+  <div class="form-group">
+
+    <label>Ваше имя</label>
+    <input name="user_name" type="text" class="form-control"s placeholder="Ваше имя" value="<%= @user_name %>">
+    <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+
+  </div>
+  <div class="form-group">
+    <label>Ваш телефон</label>
+    <input name="user_phone" type="text" class="form-control"s placeholder="Ваш телефон" value="<%= @user_phone %>">
+    <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+  </div>
+
+  <div class="form-group">
+    <label>Дата</label>
+    <input name="user_date" type="text" class="form-control"s placeholder="Дата" value="<%= @user_date %>">
+    <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+  </div>
+
+  <select name="worker" class="custom-select">
+  <option selected>Выбор специалиста</option>
+  <option value="John Newman">John Newman</option>
+  <option value="Petr Dranga">Petr Dranga</option>
+  <option value="Viktor Gugo">Viktor Gugo</option>
+</select>
+
+  <button type="submit" class="btn btn-primary">Записаться</button>
+
+
+</form>
