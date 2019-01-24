@@ -68,6 +68,8 @@ end
   f.write "Клиент #{@user_name} записался на #{@user_date} к специалисту #{@worker}. Контактный телефон: #{@user_phone}\n"
   f.close
 
+#Save in to database ----------------------------------------
+
 db = get_db
 db.execute 'INSERT INTO Users
   (
@@ -77,7 +79,7 @@ db.execute 'INSERT INTO Users
     worker
     )
     VALUES (?,?,?,?)', [@user_name, @user_phone, @user_date, @worker]
-
+#-------------------------------------------------------------
   @message = "#{@user_name}, Вы записаны на #{@user_date}"
 
   Pony.options = {
