@@ -6,7 +6,7 @@ require 'sqlite3'
 
 configure do
   @db = SQLite3::Database.new 'base.db'
-  @db.execute 'CREATE TABLE
+  @db.execute 'CREATE TABLE IF NOT EXISTS
   "Users"
   (
   	"id" Integer NOT NULL PRIMARY KEY AUTOINCREMENT,
