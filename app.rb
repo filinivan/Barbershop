@@ -2,7 +2,20 @@ require 'rubygems'
 require 'sinatra'
 require 'pony'
 require 'sinatra/reloader'
+require 'sqlite3'
 
+configure do
+  @db = SQLite3::Database.new 'base.db'
+  @db.execute 'CREATE TABLE
+  "Users"
+  (
+  	"id" Integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+  	"username" Text,
+  	"userphone" Text,
+  	"date_stamp" Text,
+  	"worker" Text
+    )'
+end
 
 get '/' do
   erb :index
