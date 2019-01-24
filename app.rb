@@ -5,8 +5,8 @@ require 'sinatra/reloader'
 require 'sqlite3'
 
 configure do
-  @db = SQLite3::Database.new 'base.db'
-  @db.execute 'CREATE TABLE IF NOT EXISTS
+  db = get_db
+  db.execute 'CREATE TABLE IF NOT EXISTS
   "Users"
   (
   	"id" Integer NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -68,14 +68,15 @@ end
   f.write "Клиент #{@user_name} записался на #{@user_date} к специалисту #{@worker}. Контактный телефон: #{@user_phone}\n"
   f.close
 
-@db.execute 'INSERT INTO Users
+db = get_db
+db.execute 'INSERT INTO Users
   (
     username,
     userphone,
     date_stamp,
     worker
     )
-    VALUES ('?,?,?,?')', [@user_name, @user_phone, @user_date, @worker]
+    VALUES (?,?,?,?)', [@user_name, @user_phone, @user_date, @worker]
 
   @message = "#{@user_name}, Вы записаны на #{@user_date}"
 
@@ -109,4 +110,8 @@ post '/job' do
   j.close
 
   erb :job
+end
+
+def get_db
+  return SQLite3::Database.new 'base.db'
 end
