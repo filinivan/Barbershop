@@ -69,7 +69,6 @@ end
   f.close
 
 #Save in to database ----------------------------------------
-
 db = get_db
 db.execute 'INSERT INTO Users
   (
@@ -110,7 +109,6 @@ post '/job' do
   j = File.open "./public/job_list.txt", "a"
   j.write "Кандидат #{@job_email} желает работать. Имеет навыки #{@job_text}.\n"
   j.close
-
   erb :job
 end
 
