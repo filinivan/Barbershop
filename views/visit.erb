@@ -2,7 +2,11 @@
 <br>
 <p><%= @message %></p>
 
-
+<script type="text/javascript">
+  $(function(){
+    $('#datetimepicker').datetimepicker();
+  });
+</script>
 
 <br>
 <form action="/visit" method="post">
@@ -21,7 +25,7 @@
 
   <div class="form-group">
     <label>Дата</label>
-    <input name="user_date" type="text" class="form-control"s placeholder="Дата" value="<%= @user_date %>">
+    <input id="datetimepicker" name="user_date" type="text" class="form-control"s placeholder="Дата" value="<%= @user_date %>">
     <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
   </div>
 
