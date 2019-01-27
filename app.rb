@@ -5,7 +5,7 @@ require 'sinatra/reloader'
 require 'sqlite3'
 
 configure do
-  db = get_db
+  db = SQLite3::Database.new 'base.db'
   db.execute 'CREATE TABLE IF NOT EXISTS
   "Users"
   (
@@ -15,6 +15,7 @@ configure do
   	"date_stamp" Text,
   	"worker" Text
     )'
+    db.close
 end
 
 get '/' do
@@ -59,28 +60,31 @@ post '/visit' do
     :user_date => 'Неверно введена дата'
   }
 
-@error = hh.select {|key,value| params[key] == ''}.values.join(", ")
+  @error = hh.select {|key,value| params[key] == ''}.values.join(", ")
 
-if @error != ''
-  return erb :visit
-end
+  if @error != ''
+    return erb :visit
+  end
+=begin
   f = File.open "./public/clients.txt", "a"
   f.write "Клиент #{@user_name} записался на #{@user_date} к специалисту #{@worker}. Контактный телефон: #{@user_phone}\n"
   f.close
-
+=end
 #Save in to database ----------------------------------------
-db = get_db
-db.execute 'INSERT INTO Users
-  (
-    username,
-    userphone,
-    date_stamp,
-    worker
-    )
-    VALUES (?,?,?,?)', [@user_name, @user_phone, @user_date, @worker]
+
+  db = get_db
+  db.execute 'INSERT INTO Users
+    (
+      username,
+      userphone,
+      date_stamp,
+      worker
+      )
+      VALUES (?,?,?,?)', [@user_name, @user_phone, @user_date, @worker]
+
 #-------------------------------------------------------------
   @message = "#{@user_name}, Вы записаны на #{@user_date}"
-
+=begin
   Pony.options = {
         :subject => "ivan@wannagift.ru",
         :body => "Тело сообщения",
@@ -97,7 +101,7 @@ db.execute 'INSERT INTO Users
         }
 
         Pony.mail(:to => 'filin87@gmail.com', :from => 'ivan@wannagift.ru', :subject => "Запись в Барбершоп", :body => "#{@message}")
-
+=end
   erb :visit
 
 end
