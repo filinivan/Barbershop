@@ -3,10 +3,11 @@
 <p><%= @message %></p>
 
 <script type="text/javascript">
-  $(function(){
-    $('#datetimepicker').datetimepicker();
+  $(document).ready(function(){
+    jQuery('#datetimepicker').datetimepicker();
   });
 </script>
+
 
 <br>
 <form action="/visit" method="post">

@@ -4,6 +4,7 @@ require 'pony'
 require 'sinatra/reloader'
 require 'sqlite3'
 
+=begin
 configure do
   db = SQLite3::Database.new 'base.db'
   db.execute 'CREATE TABLE IF NOT EXISTS
@@ -17,6 +18,7 @@ configure do
     )'
     db.close
 end
+=end
 
 get '/' do
   erb :index
@@ -36,6 +38,10 @@ end
 
 get '/admin' do
   erb :admin
+end
+
+get '/showusers' do
+  erb "showusers"
 end
 
 post '/index' do
@@ -80,7 +86,7 @@ post '/visit' do
       date_stamp,
       worker
       )
-      VALUES (?,?,?,?)', [@user_name, @user_phone, @user_date, @worker]
+      VALUES (?,?,?,?)', [@user_name, @user_phone, @user_date, @worker];
 
 #-------------------------------------------------------------
   @message = "#{@user_name}, Вы записаны на #{@user_date}"
