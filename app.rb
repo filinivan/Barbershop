@@ -4,7 +4,7 @@ require 'pony'
 require 'sinatra/reloader'
 require 'sqlite3'
 
-=begin
+
 configure do
   db = SQLite3::Database.new 'base.db'
   db.execute 'CREATE TABLE IF NOT EXISTS
@@ -18,7 +18,7 @@ configure do
     )'
     db.close
 end
-=end
+
 
 get '/' do
   erb :index
@@ -41,7 +41,10 @@ get '/admin' do
 end
 
 get '/showusers' do
-  erb "showusers"
+db = get_db
+@results = db.execute 'select * from Users order by id desc'
+
+  erb :showusers
 end
 
 post '/index' do
@@ -108,6 +111,7 @@ post '/visit' do
 
         Pony.mail(:to => 'filin87@gmail.com', :from => 'ivan@wannagift.ru', :subject => "Запись в Барбершоп", :body => "#{@message}")
 =end
+db.close
   erb :visit
 
 end
@@ -123,5 +127,7 @@ post '/job' do
 end
 
 def get_db
-  return SQLite3::Database.new 'base.db'
+  db = SQLite3::Database.new 'base.db'
+  db.results_as_hash = true
+  return db
 end
