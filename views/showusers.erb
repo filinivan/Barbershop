@@ -8,9 +8,17 @@
 </head>
 <body>
 
+
+
   <table class="table">
     <% @results.each do |row|%>
+      <tr>
+        <td><%= row['username']%></td>
+        <td><%= row['userphone']%></td>
+        <td><%= row['date_stamp']%></td>
+        <td><%= row['worker']%></td>
 
+      </tr>
     <% end %>
   </table>
 
