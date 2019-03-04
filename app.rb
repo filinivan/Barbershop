@@ -119,6 +119,7 @@ post '/visit' do
 
 #-------------------------------------------------------------
   @message = "#{@user_name}, Вы записаны на #{@user_date}"
+
 =begin
   Pony.options = {
         :subject => "ivan@wannagift.ru",
@@ -138,6 +139,7 @@ post '/visit' do
         Pony.mail(:to => 'filin87@gmail.com', :from => 'ivan@wannagift.ru', :subject => "Запись в Барбершоп", :body => "#{@message}")
 =end
 db.close
+  erb "<h2> Спасибо, вы записаны</h2>"
   erb :visit
 
 end
