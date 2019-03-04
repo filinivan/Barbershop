@@ -9,14 +9,16 @@ def is_barber_exists? db, name
 end
 
 def seed_db db, barbers
-
   barbers.each do |barber|
     if !is_barber_exists? db, barber
       db.execute 'insert into Barbers (name) values (?)', [barber]
     end
-
   end
+end
 
+before do
+  db = get_db
+  @barbers = db.execute 'select * from Barbers'
 end
 
 configure do

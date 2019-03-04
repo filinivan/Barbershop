@@ -32,9 +32,14 @@
 
   <select name="worker" class="custom-select">
   <option selected>Выбор специалиста</option>
+  <% @barbers.each do |item|%>
+    <option <%= @worker == item['name'] ? 'selected' : '' %>><%= item['name']%></option>
+  <% end %>
+<!--
   <option value="John Newman">John Newman</option>
   <option value="Petr Dranga">Petr Dranga</option>
   <option value="Viktor Gugo">Viktor Gugo</option>
+-->
 </select>
 
   <button type="submit" class="btn btn-primary">Записаться</button>
